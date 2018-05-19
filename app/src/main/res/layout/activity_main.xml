@@ -35,44 +35,52 @@
 
     <RelativeLayout
         android:id="@+id/settings"
-        android:layout_width="40dp"
+        android:layout_width="50dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button"
+        android:background="@drawable/button_settings"
         android:elevation="5dp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:src="@mipmap/settings" />
+            android:src="@mipmap/settings_1" />
     </RelativeLayout>
 
 
     <RelativeLayout
         android:id="@+id/search"
-        android:layout_width="160dp"
+        android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_marginVertical="10dp"
-        android:background="@drawable/button"
+        android:background="@drawable/button_left"
         android:elevation="5dp"
-        android:rotation="180">
-
+        >
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/lupa"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:rotation="180"
-            android:src="@mipmap/search" />
+            android:layout_marginLeft="25dp"
+            android:src="@mipmap/search_lupa" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="27dp"
+            android:text="Куда?"
+            android:layout_toRightOf="@+id/lupa"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/home"
-        android:layout_width="160dp"
+        android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -81,11 +89,23 @@
         android:elevation="5dp">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/imHome"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:src="@mipmap/home" />
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:src="@mipmap/home_1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="27dp"
+            android:text="Домой"
+            android:layout_toLeftOf="@+id/imHome"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"/>
+
     </RelativeLayout>
 
     <View

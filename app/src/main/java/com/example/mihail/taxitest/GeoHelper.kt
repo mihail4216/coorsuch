@@ -47,7 +47,7 @@ class GeoHelper(val context: Context) {
         val home = ((jsonObject.getJSONArray("results")[0] as JSONObject).getJSONArray("address_components")[0] as JSONObject).get("long_name")
         val street = ((jsonObject.getJSONArray("results")[0] as JSONObject).getJSONArray("address_components")[1] as JSONObject).get("long_name")
         val city = ((jsonObject.getJSONArray("results")[0] as JSONObject).getJSONArray("address_components")[2] as JSONObject).get("long_name")
-        return "$street,$home,$city"
+        return "$street,$home,\n $city"
     }
 
 

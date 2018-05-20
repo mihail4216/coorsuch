@@ -1,4 +1,4 @@
-package com.example.mihail.taxitest
+package com.example.mihail.taxitest.activity
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,8 +7,13 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.support.v4.app.FragmentActivity
+import android.util.Log
+import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.example.mihail.taxitest.ApiConfig
+import com.example.mihail.taxitest.GeoHelper
+import com.example.mihail.taxitest.R
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.yandex.mapkit.map.CameraPosition
@@ -22,7 +27,13 @@ import com.yandex.mapkit.map.Map
 import org.json.JSONObject
 
 
-class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListener {
+class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListener, CameraListener {
+    override fun onCameraPositionChanged(p0: Map?, p1: CameraPosition?, p2: CameraUpdateSource?, p3: Boolean) {
+        if (p3) showAddress(p1!!.target.latitude, p1.target.longitude)
+        else labelTxt.visibility = View.GONE
+        Log.d(tag, "${p1!!.target.latitude}/${p1.target.longitude}")
+    }
+
     override fun onConnectionFailed(p0: ConnectionResult) {
         print("fail")
     }
@@ -38,7 +49,7 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
-        MapKitFactory.setApiKey(ApiConfig.TOKEN_API_YANDEX_2)
+        MapKitFactory.setApiKey(ApiConfig.TOKEN_API_YANDEX_3)
         MapKitFactory.initialize(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -50,34 +61,30 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
 
 
 
-        if (isGeoDisabled()){
+        if (isGeoDisabled()) {
             startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
         }
 
         mapView.map.move(
-                CameraPosition(Point( 54.300, 48.3300), 16.0f, 0.0f, 0.0f),
+                CameraPosition(Point(54.300, 48.3300), 10.0f, 0.0f, 0.0f),
                 Animation(Animation.Type.SMOOTH, 0f),
                 null)
         searchBtn.setOnClickListener {
-
-            //            labelTxt.text = "${}"
-//            labelTxt.text = "${mapView.map.cameraPosition.target.latitude}/${mapView.map.cameraPosition.target.longitude}"
+            startActivity(Intent(this, SearchActivity::class.java)
+//                    .putExtra()
+            )
+        }
+        homeBtn.setOnClickListener {
+            startActivity(Intent(this,SearchActivity::class.java)
+//                    .putExtra()
+            )
+        }
+        settingsBtn.setOnClickListener {
+            startActivity(Intent(this,SettingsActivity::class.java))
         }
 
-//        geoHelper.addParam("latlng","${54.300},${48.3300}")
-//        geoHelper.connect(geoHelper.addParamLglt(54.300.toString(), 48.300.toString())){
-//            val json = JSONObject(it)
-//           labelTxt.text = geoHelper.getStreetFromJson(json)
-//        }
-        mapView.map.addCameraListener(object :CameraListener{
-            override fun onCameraPositionChanged(p0: Map?, p1: CameraPosition?, p2: CameraUpdateSource?, p3: Boolean) {
-                showAddress(p1!!.target.latitude,p1.target.longitude)
-            }
+        mapView.map.addCameraListener(this)
 
-        })
-//        showAddress(54.300, 48.3300)
-
-//
     }
 
 
@@ -100,10 +107,12 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
         return !mIsGPSEnabled && !mIsNetworkEnabled
     }
 
-    fun showAddress(lt: Double, lg: Double){
-        geoHelper.connect(geoHelper.addParamLglt(lt, lg)){
+    fun showAddress(lt: Double, lg: Double) {
+        geoHelper.connect(geoHelper.addParamLglt(lt, lg)) {
             val json = JSONObject(it)
+            labelTxt.visibility = View.VISIBLE
             labelTxt.text = geoHelper.getStreetFromJson(json)
+//            Log.d(tag,it)
         }
     }
 

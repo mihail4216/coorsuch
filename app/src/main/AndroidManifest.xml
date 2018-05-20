@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mihail.taxitest">
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!--<uses-permission android:name="android.permission.Loc"/>-->
@@ -9,25 +10,28 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/taxi"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity"
-            >
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-                <!--<meta-data-->
-                    <!--android:name="com.google.android.geo.API_KEY"-->
-                    <!--android:value="AIzaSyAbiZe38C4jLDpKu4p7hWWYLjitK02oEXA"/>-->
+            <!--<meta-data-->
+            <!--android:name="com.google.android.geo.API_KEY"-->
+            <!--android:value="AIzaSyAbiZe38C4jLDpKu4p7hWWYLjitK02oEXA"/>-->
         </activity>
-        <activity android:name=".Google"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".activity.SearchActivity"
+            android:theme="@style/Dialog" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:theme="@style/Base.Theme.AppCompat.Light" />
 
     </application>
 

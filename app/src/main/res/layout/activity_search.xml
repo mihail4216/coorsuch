@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00999999">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_alignParentBottom="true"
+            android:background="#fa4d4a">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_alignParentBottom="true"
+                android:background="#fff"
+                android:gravity="center"
+                android:text="Заказать такси"
+                android:textColor="#fa4d4a"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/whence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:textColor="#fff"
+                android:hint="Откуда"
+                android:textColorHint="#fff"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/where"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/whence"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:textColor="#fff"
+                android:hint="Куда"
+                android:textColorHint="#fff"
+                android:textSize="24sp" />
+            <TextView
+                android:layout_below="@+id/where"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="Способ оплаты:"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/choice_pay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_below="@id/where"
+                android:layout_marginTop="30dp"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:text="Наличными"
+                android:padding="5dp"
+                android:background="@drawable/bg_method_pay"/>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

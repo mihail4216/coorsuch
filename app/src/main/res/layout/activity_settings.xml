@@ -14,7 +14,7 @@
             android:background="@color/colorApp">
 
             <View
-                android:id="@+id/breack"
+                android:id="@+id/back"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -53,7 +53,8 @@
         <EditText
             android:id="@+id/phone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:singleLine="true"
             android:textColor="@color/colorApp" />
 
         <View
@@ -73,8 +74,9 @@
 
         <EditText
             android:id="@+id/home"
+            android:singleLine="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:textColor="@color/colorApp" />
 
         <View

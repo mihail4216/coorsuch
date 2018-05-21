@@ -28,47 +28,50 @@
             <EditText
                 android:id="@+id/whence"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="20dp"
-                android:textColor="#fff"
                 android:hint="Откуда"
+                android:singleLine="true"
+                android:textColor="#fff"
                 android:textColorHint="#fff"
                 android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/where"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_below="@+id/whence"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="20dp"
-                android:textColor="#fff"
                 android:hint="Куда"
+                android:singleLine="true"
+                android:textColor="#fff"
                 android:textColorHint="#fff"
                 android:textSize="24sp" />
+
             <TextView
-                android:layout_below="@+id/where"
-                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:text="Способ оплаты:"
+                android:layout_below="@+id/where"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
-                />
+                android:text="Способ оплаты:"
+                android:textSize="16dp" />
+
             <TextView
                 android:id="@+id/choice_pay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
                 android:layout_below="@id/where"
+                android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="30dp"
-                android:textSize="20dp"
-                android:textColor="#fff"
+                android:background="@drawable/bg_method_pay"
                 android:gravity="center"
-                android:text="Наличными"
                 android:padding="5dp"
-                android:background="@drawable/bg_method_pay"/>
+                android:text="Наличными"
+                android:textColor="#fff"
+                android:textSize="20dp" />
 
 
         </RelativeLayout>

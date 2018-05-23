@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="300dp"
     android:background="#00999999">
 
     <RelativeLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -28,26 +28,34 @@
             <EditText
                 android:id="@+id/whence"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="20dp"
+                android:background="#fff"
+                android:elevation="4dp"
                 android:hint="Откуда"
+                android:paddingLeft="10dp"
+                android:paddingVertical="8dp"
                 android:singleLine="true"
-                android:textColor="#fff"
-                android:textColorHint="#fff"
+                android:textColor="#536DFE"
+                android:textColorHint="#536DFE"
                 android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/where"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/whence"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="20dp"
+                android:background="#fff"
+                android:elevation="4dp"
                 android:hint="Куда"
+                android:paddingLeft="10dp"
+                android:paddingVertical="8dp"
                 android:singleLine="true"
-                android:textColor="#fff"
-                android:textColorHint="#fff"
+                android:textColor="@color/colorApp"
+                android:textColorHint="@color/colorApp"
                 android:textSize="24sp" />
 
             <TextView

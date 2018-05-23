@@ -23,8 +23,6 @@ class SearchActivity : Activity() {
 
         whenceTxt = findViewById(R.id.whence)
         whereTxt = findViewById(R.id.where)
-//        whenceTxt.text.clear()
-//        whereTxt.text.clear()
 
         whereTxt.text.append(intent.getStringExtra(EXTRA_where))
         whenceTxt.text.append(intent.getStringExtra(EXTRA_whence))

@@ -11,6 +11,7 @@ import android.provider.Settings
 import android.support.v4.app.FragmentActivity
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.mihail.taxitest.ApiConfig
@@ -53,6 +54,12 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
     private lateinit var labelTxt: TextView
     private lateinit var compasBtn: View
 
+    private lateinit var whereTxt: EditText
+    private lateinit var whenceTxt: EditText
+    private lateinit var contSearch: View
+
+    private lateinit var targetVeiw: View
+
     private lateinit var cameraPosition: CameraPosition
 
     private val geoHelper = GeoHelper(this)
@@ -60,6 +67,7 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
     private var latitude = 0.0
     private var longitude = 0.0
     private var textStreet = ""
+    private var textStreetTarget = ""
 
     @SuppressLint("SetTextI18n", "MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +84,12 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
         settingsBtn = findViewById(R.id.settings)
         labelTxt = findViewById(R.id.label)
         compasBtn = findViewById(R.id.compas)
+        targetVeiw = findViewById(R.id.target)
+
+        whenceTxt = findViewById(R.id.whence)
+        whereTxt = findViewById(R.id.where)
+        contSearch = findViewById(R.id.cont_search)
+
 
         val mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
@@ -98,19 +112,39 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
                 CameraPosition(Point(54.200, 48.3300), 10.0f, 0.0f, 0.0f),
                 Animation(Animation.Type.SMOOTH, 0f),
                 null)
+
         searchBtn.setOnClickListener {
-            getStringStreet(latitude,longitude)
-            startActivity(Intent(this, SearchActivity::class.java)
-                    .putExtra(SearchActivity.EXTRA_whence, textStreet)
-                    .putExtra(SearchActivity.EXTRA_where, "")
-            )
+            getStringStreet(latitude, longitude)
+
+            hideOrShowAddress(true)
+//            clearTextField()
+//            whereTxt.text.append("")
+//            whenceTxt.text.append(textStreet)
+            fillTextField(textStreet,"")
         }
+
         homeBtn.setOnClickListener {
-            startActivity(Intent(this, SearchActivity::class.java)
-                    .putExtra(SearchActivity.EXTRA_whence, textStreet)
-                    .putExtra(SearchActivity.EXTRA_where, MainRepository.instance.homeAddress)
-            )
+            getStringStreet(latitude, longitude)
+            hideOrShowAddress(true)
+//            clearTextField()
+//            whereTxt.text.append(MainRepository.instance.homeAddress)
+//            whenceTxt.text.append(textStreet)
+
+            fillTextField(MainRepository.instance.homeAddress,textStreet)
+
         }
+        targetVeiw.setOnLongClickListener {
+            getStringStreet(latitude, longitude)
+            getStreetByTarget(cameraPosition.target.latitude, cameraPosition.target.longitude)
+            hideOrShowAddress(true)
+//            clearTextField()
+//            whereTxt.text.append(textStreetTarget)
+//            whenceTxt.text.append(textStreet)
+//
+            fillTextField(textStreet,textStreetTarget)
+            true
+        }
+
         settingsBtn.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
@@ -119,6 +153,30 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
 
     }
 
+    private fun getStreetByTarget(latitude: Double, longitude: Double) {
+        geoHelper.connect(geoHelper.addParamLglt(latitude, longitude)) {
+            val json = JSONObject(it)
+            labelTxt.visibility = View.VISIBLE
+            textStreetTarget = geoHelper.getShortStreetFromJson(json)
+//            Log.d(tag,it)
+        }
+    }
+
+    fun hideOrShowAddress(isShowSearch: Boolean) {
+        if (isShowSearch) {
+            contSearch.visibility = View.VISIBLE
+            compasBtn.visibility = View.GONE
+            searchBtn.visibility = View.GONE
+            homeBtn.visibility = View.GONE
+        } else {
+            contSearch.visibility = View.GONE
+            compasBtn.visibility = View.VISIBLE
+            searchBtn.visibility = View.VISIBLE
+            homeBtn.visibility = View.VISIBLE
+        }
+
+
+    }
 
     override fun onStop() {
         mapView.onStop()
@@ -147,11 +205,12 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
 //            Log.d(tag,it)
         }
     }
+
     fun getStringStreet(lt: Double, lg: Double) {
         geoHelper.connect(geoHelper.addParamLglt(lt, lg)) {
             val json = JSONObject(it)
             labelTxt.visibility = View.VISIBLE
-            textStreet = geoHelper.getStreetFromJson(json)
+            textStreet = geoHelper.getShortStreetFromJson(json)
 //            Log.d(tag,it)
         }
     }
@@ -179,6 +238,21 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
         if (isGeoDisabled()) {
             startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
         }
+    }
+
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        hideOrShowAddress(false)
+    }
+
+    fun clearTextField() {
+        whenceTxt.text.clear()
+        whereTxt.text.clear()
+    }
+    fun fillTextField(whence:String,where:String){
+        clearTextField()
+        whereTxt.text.append(where)
+        whenceTxt.text.append(whence)
     }
 
 

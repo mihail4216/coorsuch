@@ -57,6 +57,7 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
     private lateinit var whereTxt: EditText
     private lateinit var whenceTxt: EditText
     private lateinit var contSearch: View
+    private lateinit var methodPay: TextView
 
     private lateinit var targetVeiw: View
 
@@ -89,6 +90,7 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
         whenceTxt = findViewById(R.id.whence)
         whereTxt = findViewById(R.id.where)
         contSearch = findViewById(R.id.cont_search)
+        methodPay = findViewById(R.id.choice_pay)
 
 
         val mLocationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -115,32 +117,20 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
 
         searchBtn.setOnClickListener {
             getStringStreet(latitude, longitude)
-
             hideOrShowAddress(true)
-//            clearTextField()
-//            whereTxt.text.append("")
-//            whenceTxt.text.append(textStreet)
             fillTextField(textStreet,"")
         }
 
         homeBtn.setOnClickListener {
             getStringStreet(latitude, longitude)
             hideOrShowAddress(true)
-//            clearTextField()
-//            whereTxt.text.append(MainRepository.instance.homeAddress)
-//            whenceTxt.text.append(textStreet)
-
-            fillTextField(MainRepository.instance.homeAddress,textStreet)
+            fillTextField(textStreet,MainRepository.instance.homeAddress)
 
         }
         targetVeiw.setOnLongClickListener {
             getStringStreet(latitude, longitude)
             getStreetByTarget(cameraPosition.target.latitude, cameraPosition.target.longitude)
             hideOrShowAddress(true)
-//            clearTextField()
-//            whereTxt.text.append(textStreetTarget)
-//            whenceTxt.text.append(textStreet)
-//
             fillTextField(textStreet,textStreetTarget)
             true
         }
@@ -151,6 +141,10 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
 
         mapView.map.addCameraListener(this)
 
+        methodPay.setOnClickListener {
+            startActivity(Intent(this,SettingsActivity::class.java))
+        }
+
     }
 
     private fun getStreetByTarget(latitude: Double, longitude: Double) {
@@ -158,7 +152,6 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
             val json = JSONObject(it)
             labelTxt.visibility = View.VISIBLE
             textStreetTarget = geoHelper.getShortStreetFromJson(json)
-//            Log.d(tag,it)
         }
     }
 
@@ -202,7 +195,6 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
             val json = JSONObject(it)
             labelTxt.visibility = View.VISIBLE
             labelTxt.text = geoHelper.getStreetFromJson(json)
-//            Log.d(tag,it)
         }
     }
 
@@ -211,7 +203,6 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
             val json = JSONObject(it)
             labelTxt.visibility = View.VISIBLE
             textStreet = geoHelper.getShortStreetFromJson(json)
-//            Log.d(tag,it)
         }
     }
 
@@ -238,6 +229,7 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
         if (isGeoDisabled()) {
             startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
         }
+        changeText()
     }
 
     override fun onBackPressed() {
@@ -255,5 +247,12 @@ class MainActivity : FragmentActivity(), GoogleApiClient.OnConnectionFailedListe
         whenceTxt.text.append(whence)
     }
 
+    private fun changeText(){
+        if (MainRepository.instance.isPayCard){
+            methodPay.text = "Картой"
+        }else{
+            methodPay.text = "Наличными"
+        }
+    }
 
 }

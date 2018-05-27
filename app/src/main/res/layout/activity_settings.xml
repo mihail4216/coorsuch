@@ -39,66 +39,157 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/action_bar"
         android:layout_marginHorizontal="10dp"
+        android:elevation="5dp"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Ваш номер телефона:"
-            android:textColor="@color/colorApp"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="10dp"
+            android:background="@color/colorApp"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:singleLine="true"
-            android:textColor="@color/colorApp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="10dp"
+                android:text="Ваш номер телефона:"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginHorizontal="10dp"
-            android:background="#709090ea" />
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textColor="@color/colorApp"
+                android:textSize="24dp" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Домашний адрес, чтобы мы могли доставить вас домой по одному клику:"
-            android:textColor="@color/colorApp"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/home"
-            android:singleLine="true"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textColor="@color/colorApp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginHorizontal="10dp"
-            android:background="#700c0cae" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Выберете способ оплаты, который вам удобен:"
-            android:textColor="@color/colorApp"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="10dp"
+            android:background="@color/colorApp"
+            android:elevation="5dp"
+            android:orientation="vertical">
 
-        <View
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="10dp"
+                android:text="Домашний адрес, чтобы мы могли доставить вас домой по одному клику:"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/home"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textColor="@color/colorApp"
+                android:textSize="24dp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginHorizontal="10dp"
-            android:background="#70777778" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorApp"
+            android:elevation="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="10dp"
+                android:text="Выберете способ оплаты, который вам удобен:"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <FrameLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="30dp">
+
+                    <View
+                        android:id="@+id/met_hand"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_method_pay_settings"
+                        android:visibility="gone" />
+
+                    <View
+                        android:id="@+id/money"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center"
+                        android:background="@mipmap/pay" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp">
+
+                    <View
+                        android:id="@+id/met_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_method_pay_settings"
+                        android:visibility="gone" />
+
+                    <View
+                        android:id="@+id/card"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center"
+                        android:background="@mipmap/credit_card" />
+                </FrameLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/add_card"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:text="Добавить карту"
+                android:textColor="@color/colorApp"
+                android:textSize="28dp"
+
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

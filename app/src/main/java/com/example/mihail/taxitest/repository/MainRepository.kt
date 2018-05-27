@@ -9,6 +9,7 @@ class MainRepository private constructor() {
     private val APP_PREFERENCES = "mysettings"
     private val HOME_ED = "home"
     private val PHONE_ED = "phone"
+    private val IS_PAYCARD_ED = "isCard"
 
     private object Holder {
         val instance = MainRepository()
@@ -18,13 +19,11 @@ class MainRepository private constructor() {
         val instance: MainRepository by lazy { Holder.instance }
     }
 
-    //    private lateinit var context: Context
+    lateinit var data: SharedPreferences
+
     fun init(context: Context) {
-//        this.context = context
         data = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
     }
-
-    lateinit var data: SharedPreferences
 
 
     var phone: String
@@ -46,6 +45,17 @@ class MainRepository private constructor() {
         set(s) {
             val ed = data.edit()
             ed.putString(HOME_ED, s)
+            ed.apply()
+        }
+
+    var isPayCard: Boolean
+        get() {
+            return data.getBoolean(IS_PAYCARD_ED, false)
+        }
+        @SuppressLint("CommitPrefEdits")
+        set(s) {
+            val ed = data.edit()
+            ed.putBoolean(IS_PAYCARD_ED, s)
             ed.apply()
         }
 }

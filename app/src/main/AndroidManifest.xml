@@ -28,7 +28,7 @@
             <!--android:value="AIzaSyAbiZe38C4jLDpKu4p7hWWYLjitK02oEXA"/>-->
         </activity>
         <activity
-            android:name=".activity.SearchActivity"
+            android:name=".activity.CardActivity"
             android:theme="@style/Dialog" />
         <activity
             android:name=".activity.SettingsActivity"
